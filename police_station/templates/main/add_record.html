@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Add Record{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('main.add_record') }}" method="post">
+        <label for="table_section">Select a table to add record to:</label>
+        <select name="table_section" id="table_section" onchange="showInputs()">
+            <option value="table_1">Witness</option>
+            <option value="table_2">Case</option>
+            <option value="table_3">Suspect</option>
+            <option value="table_4">Victim</option>
+            <option value="table_5">Evidence</option>
+            <option value="table_6">Vehicle</option>
+            <option value="table_7">Police Department</option>
+            <option value="table_8">Arrest Record</option>
+            <option value="table_9">Police Officer</option>
+            <option value="table_10">Officer Arrest Record</option>
+            <option value="table_11">Suspect Case</option>
+            <option value="table_12">Case Witness</option>
+            <option value="table_13">Crime Scene</option>
+        </select>
+
+        <div id="inputContainer" style="margin-top: 50px;"></div>
+    </form>
+
+    
+    <script>
+        function showInputs() {
+            var selectedTable = document.getElementById("table_section").value;
+            var inputContainer = document.getElementById("inputContainer");
+            
+            inputContainer.innerHTML = "";
+
+            switch (selectedTable) {
+                case "table_1":
+                    inputContainer.innerHTML += '<div><label for="witness_name">Witness Name:</label>' +
+                                                '<input type="text" name="witness_name" id="witness_name"></div>' +
+                                                '<div><label for="witness_contact">Contact Information:</label>' +
+                                                '<input type="text" name="witness_contact" id="witness_contact"></div>' +
+                                                '<div><label for="witness_statement">Statement:</label>' +
+                                                '<textarea name="witness_statement" id="witness_statement"></textarea></div>' +
+                                                '<div><label for="relationship_to_case">Relationship to Case:</label>' +
+                                                '<input type="text" name="relationship_to_case" id="relationship_to_case"></div>' +
+                                                '<div><label for="witness_occupation">Occupation:</label>' +
+                                                '<input type="text" name="witness_occupation" id="witness_occupation"></div>' +
+                                                '<div><label for="interview_date">Date of Interview:</label>' +
+                                                '<input type="date" name="interview_date" id="interview_date"></div>' +
+                                                '<div><label for="witness_address">Address:</label>' +
+                                                '<input type="text" name="witness_address" id="witness_address"></div>';
+                    break;
+                case "table_2":
+                    inputContainer.innerHTML += '<div><label for="case_description">Case Description:</label>' +
+                                                '<textarea name="case_description" id="case_description"></textarea></div>' +
+                                                '<div><label for="date_opened">Date Opened:</label>' +
+                                                '<input type="date" name="date_opened" id="date_opened"></div>' +
+                                                '<div><label for="case_status">Status:</label>' +
+                                                '<input type="text" name="case_status" id="case_status"></div>' +
+                                                '<div><label for="case_type">Type:</label>' +
+                                                '<input type="text" name="case_type" id="case_type"></div>' +
+                                                '<div><label for="investigating_officer">Investigating Officer ID:</label>' +
+                                                '<input type="text" name="investigating_officer" id="investigating_officer"></div>' +
+                                                '<div><label for="priority_level">Priority Level:</label>' +
+                                                '<input type="number" name="priority_level" id="priority_level"></div>' +
+                                                '<div><label for="case_location">Location:</label>' +
+                                                '<input type="text" name="case_location" id="case_location"></div>';
+                    break;
+                case "table_3":
+                    inputContainer.innerHTML += '<div><label for="suspect_name">Suspect Name:</label>' +
+                                                '<input type="text" name="suspect_name" id="suspect_name"></div>' +
+                                                '<div><label for="date_of_birth">Date of Birth:</label>' +
+                                                '<input type="date" name="date_of_birth" id="date_of_birth"></div>' +
+                                                '<div><label for="suspect_address">Address:</label>' +
+                                                '<input type="text" name="suspect_address" id="suspect_address"></div>' +
+                                                '<div><label for="criminal_record">Criminal Record:</label>' +
+                                                '<input type="text" name="criminal_record" id="criminal_record"></div>' +
+                                                '<div><label for="height">Height:</label>' +
+                                                '<input type="number" name="height" id="height"></div>' +
+                                                '<div><label for="weight">Weight:</label>' +
+                                                '<input type="number" name="weight" id="weight"></div>' +
+                                                '<div><label for="eye_color">Eye Color:</label>' +
+                                                '<input type="text" name="eye_color" id="eye_color"></div>';
+                    break;
+                case "table_4":
+                    inputContainer.innerHTML += '<div><label for="victim_name">Victim Name:</label>' +
+                                                '<input type="text" name="victim_name" id="victim_name"></div>' +
+                                                '<div><label for="victim_contact">Contact Information:</label>' +
+                                                '<input type="text" name="victim_contact" id="victim_contact"></div>' +
+                                                '<div><label for="victim_statement">Statement:</label>' +
+                                                '<textarea name="victim_statement" id="victim_statement"></textarea></div>' +
+                                                '<div><label for="date_of_incident">Date of Incident:</label>' +
+                                                '<input type="date" name="date_of_incident" id="date_of_incident"></div>' +
+                                                '<div><label for="injuries">Injuries:</label>' +
+                                                '<input type="text" name="injuries" id="injuries"></div>' +
+                                                '<div><label for="emergency_contact">Emergency Contact:</label>' +
+                                                '<input type="text" name="emergency_contact" id="emergency_contact"></div>' +
+                                                '<div><label for="gender">Gender:</label>' +
+                                                '<input type="text" name="gender" id="gender"></div>' +
+                                                '<div><label for="case_id">Case ID:</label>' +
+                                                '<input type="text" name="case_id" id="case_id"></div>';
+                    break;
+                case "table_5":
+                    inputContainer.innerHTML += '<div><label for="evidence_description">Evidence Description:</label>' +
+                                                '<textarea name="evidence_description" id="evidence_description"></textarea></div>' +
+                                                '<div><label for="date_collected">Date Collected:</label>' +
+                                                '<input type="date" name="date_collected" id="date_collected"></div>' +
+                                                '<div><label for="evidence_type">Type:</label>' +
+                                                '<input type="text" name="evidence_type" id="evidence_type"></div>' +
+                                                '<div><label for="chain_of_custody">Chain of Custody:</label>' +
+                                                '<input type="text" name="chain_of_custody" id="chain_of_custody"></div>' +
+                                                '<div><label for="storage_location">Storage Location:</label>' +
+                                                '<input type="text" name="storage_location" id="storage_location"></div>' +
+                                                '<div><label for="lab_analysis_results">Lab Analysis Results:</label>' +
+                                                '<textarea name="lab_analysis_results" id="lab_analysis_results"></textarea></div>' +
+                                                '<div><label for="seized_by_officer">Seized By Officer ID:</label>' +
+                                                '<input type="text" name="seized_by_officer" id="seized_by_officer"></div>';
+                    break;
+                case "table_6":
+                    inputContainer.innerHTML += '<div><label for="license_plate">License Plate:</label>' +
+                                                '<input type="text" name="license_plate" id="license_plate"></div>' +
+                                                '<div><label for="vehicle_owner">Owner:</label>' +
+                                                '<input type="text" name="vehicle_owner" id="vehicle_owner"></div>' +
+                                                '<div><label for="vehicle_make">Make:</label>' +
+                                                '<input type="text" name="vehicle_make" id="vehicle_make"></div>' +
+                                                '<div><label for="vehicle_model">Model:</label>' +
+                                                '<input type="text" name="vehicle_model" id="vehicle_model"></div>' +
+                                                '<div><label for="vehicle_color">Color:</label>' +
+                                                '<input type="text" name="vehicle_color" id="vehicle_color"></div>' +
+                                                '<div><label for="registered_address">Registered Address:</label>' +
+                                                '<input type="text" name="registered_address" id="registered_address"></div>' +
+                                                '<div><label for="vehicle_type">Vehicle Type:</label>' +
+                                                '<input type="text" name="vehicle_type" id="vehicle_type"></div>' +
+                                                '<div><label for="suspect_id">Suspect ID:</label>' +
+                                                '<input type="text" name="suspect_id" id="suspect_id"></div>';
+                    break;
+                case "table_7":
+                    inputContainer.innerHTML += '<div><label for="department_name">Department Name:</label>' +
+                                                '<input type="text" name="department_name" id="department_name"></div>' +
+                                                '<div><label for="department_location">Location:</label>' +
+                                                '<input type="text" name="department_location" id="department_location"></div>' +
+                                                '<div><label for="department_contact">Contact Information:</label>' +
+                                                '<input type="text" name="department_contact" id="department_contact"></div>' +
+                                                '<div><label for="chief_officer_id">Chief Officer ID:</label>' +
+                                                '<input type="text" name="chief_officer_id" id="chief_officer_id"></div>' +
+                                                '<div><label for="number_of_officers">Number of Officers:</label>' +
+                                                '<input type="number" name="number_of_officers" id="number_of_officers"></div>' +
+                                                '<div><label for="department_budget">Budget:</label>' +
+                                                '<input type="text" name="department_budget" id="department_budget"></div>' +
+                                                '<div><label for="special_units">Special Units:</label>' +
+                                                '<input type="text" name="special_units" id="special_units"></div>';
+                    break;
+                case "table_8":
+                    inputContainer.innerHTML += '<div><label for="suspect_id_arrest">Suspect ID:</label>' +
+                                                '<input type="text" name="suspect_id_arrest" id="suspect_id_arrest"></div>' +
+                                                '<div><label for="arresting_officer">Arresting Officer ID:</label>' +
+                                                '<input type="text" name="arresting_officer" id="arresting_officer"></div>' +
+                                                '<div><label for="datetime_of_arrest">Date and Time of Arrest:</label>' +
+                                                '<input type="datetime-local" name="datetime_of_arrest" id="datetime_of_arrest"></div>' +
+                                                '<div><label for="arrest_location">Arrest Location:</label>' +
+                                                '<input type="text" name="arrest_location" id="arrest_location"></div>' +
+                                                '<div><label for="charges">Charges:</label>' +
+                                                '<input type="text" name="charges" id="charges"></div>';
+                    break;
+                case "table_9":
+                    inputContainer.innerHTML += '<div><label for="officer_name">Officer Name:</label>' +
+                                                '<input type="text" name="officer_name" id="officer_name"></div>' +
+                                                '<div><label for="badge_number">Badge Number:</label>' +
+                                                '<input type="text" name="badge_number" id="badge_number"></div>' +
+                                                '<div><label for="rank">Rank:</label>' +
+                                                '<input type="text" name="rank" id="rank"></div>' +
+                                                '<div><label for="shift">Shift:</label>' +
+                                                '<input type="text" name="shift" id="shift"></div>' +
+                                                '<div><label for="date_of_joining">Date of Joining:</label>' +
+                                                '<input type="date" name="date_of_joining" id="date_of_joining"></div>' +
+                                                '<div><label for="contact_number">Contact Number:</label>' +
+                                                '<input type="text" name="contact_number" id="contact_number"></div>' +
+                                                '<div><label for="officer_address">Address:</label>' +
+                                                '<input type="text" name="officer_address" id="officer_address"></div>';
+                    break;
+                case "table_10":
+                    inputContainer.innerHTML += '<div><label for="officer_id_arrest_record">Officer ID:</label>' +
+                                                '<input type="text" name="officer_id_arrest_record" id="officer_id_arrest_record"></div>' +
+                                                '<div><label for="arrest_record_id">Arrest Record ID:</label>' +
+                                                '<input type="text" name="arrest_record_id" id="arrest_record_id"></div>';
+                    break;
+                case "table_11":
+                    inputContainer.innerHTML += '<label for="suspect_id_case">Suspect ID:</label>' +
+                                                '<input type="text" name="suspect_id_case" id="suspect_id_case">' +
+                                                '<label for="case_id_case">Case ID:</label>' +
+                                                '<input type="text" name="case_id_case" id="case_id_case">' +
+                                                '<label for="role_in_case">Role in Case:</label>' +
+                                                '<input type="text" name="role_in_case" id="role_in_case">';
+                    break;
+                case "table_12":
+                    inputContainer.innerHTML += '<label for="case_id_witness">Case ID:</label>' +
+                                                '<input type="text" name="case_id_witness" id="case_id_witness">' +
+                                                '<label for="witness_id">Witness ID:</label>' +
+                                                '<input type="text" name="witness_id" id="witness_id">' +
+                                                '<label for="interview_date_witness">Date of Interview:</label>' +
+                                                '<input type="date" name="interview_date_witness" id="interview_date_witness">' +
+                                                '<label for="statement_witness">Statement:</label>' +
+                                                '<textarea name="statement_witness" id="statement_witness"></textarea>';
+                    break;
+                case "table_13":
+                    inputContainer.innerHTML += '<label for="location_crime_scene">Location:</label>' +
+                                                '<input type="text" name="location_crime_scene" id="location_crime_scene">' +
+                                                '<label for="date_crime_scene">Date:</label>' +
+                                                '<input type="date" name="date_crime_scene" id="date_crime_scene">' +
+                                                '<label for="description_crime_scene">Description:</label>' +
+                                                '<textarea name="description_crime_scene" id="description_crime_scene"></textarea>' +
+                                                '<label for="investigating_officer_crime_scene">Investigating Officer ID:</label>' +
+                                                '<input type="text" name="investigating_officer_crime_scene" id="investigating_officer_crime_scene">' +
+                                                '<label for="weather_conditions">Weather Conditions:</label>' +
+                                                '<input type="text" name="weather_conditions" id="weather_conditions">' +
+                                                '<label for="photos_taken">Photos Taken:</label>' +
+                                                '<input type="text" name="photos_taken" id="photos_taken">' +
+                                                '<label for="preliminary_findings">Preliminary Findings:</label>' +
+                                                '<textarea name="preliminary_findings" id="preliminary_findings"></textarea>' +
+                                                '<label for="case_id_crime_scene">Case ID:</label>' +
+                                                '<input type="text" name="case_id_crime_scene" id="case_id_crime_scene">';
+                    break;
+                default:
+                    break;
+            }
+            inputContainer.innerHTML += '<button type="submit">Save Record</button>'
+        }
+    </script>
+    
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Home{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('main.index') }}" method="post">
+        <label for="query_section">Select a query to be executed:</label>
+        <select name="query_section" id="query_section">
+            <option value="query_1">Query 1: Retrieve all cases along with details of the investigating officer</option>
+            <option value="query_2">Query 2: Find the average height of suspects who are associated with multiple cases</option>
+            <option value="query_3">Query 3: List all officers who have made arrests and the total number of arrests they have made</option>
+            <option value="query_4">Query 4: Retrieve the top 5 cases with the highest priority level and their respective investigating officers</option>
+            <option value="query_5">Query 5: Find cases where the victim's emergency contact is also a witness</option>
+            <option value="query_6">Query 6: Retrieve the details of suspects who were arrested by officers of the same rank</option>
+            <option value="query_7">Query 7: Find the average number of witnesses interviewed per case</option>
+            <option value="query_8">Query 8: Retrieve cases where the evidence storage location matches the registered address of the suspect's vehicle owner</option>
+            <option value="query_9">Query 9: List all cases that have witnesses with the same occupation</option>
+            <option value="query_10">Query 10: Retrieve officers who have not made any arrests</option>
+        </select>
+        <button type="submit">Execute Query</button>
+    </form>
+
+    {% if query_results %}
+        <h2>Query Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    {% for key in query_results[0].keys() %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in query_results %}
+                    <tr>
+                        {% for key in row.keys() %}
+                            <td>{{ row[key] }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3>No results found!</h3>
+    {% endif %}
+{% endblock %}
+
